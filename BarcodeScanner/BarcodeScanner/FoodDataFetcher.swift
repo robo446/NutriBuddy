@@ -29,10 +29,7 @@ struct Nutriments: Codable {
 struct APIResponse: Codable {
     let product: Product?
 }
-// MARK: - Nutriments Model
 
-
-// MARK: - Healthiness Score Calculation Extension
 extension Product {
     var healthinessScore: Int {
         guard let nutriments = nutriments else { return 0 }
@@ -40,16 +37,16 @@ extension Product {
         var score = 100
 
         if let energy = nutriments.energy_100g {
-            score -= min(Int(energy) / 20, 30) // Deduct up to 30 points based on energy
+            score -= min(Int(energy) / 20, 30) 
         }
         if let fat = nutriments.fat_100g {
-            score -= min(Int(fat) * 2, 20) // Deduct up to 20 points based on fat
+            score -= min(Int(fat) * 2, 20)
         }
         if let sugars = nutriments.sugars_100g {
-            score -= min(Int(sugars) * 2, 30) // Deduct up to 30 points based on sugars
+            score -= min(Int(sugars) * 2, 30) 
         }
         if let proteins = nutriments.proteins_100g {
-            score += min(Int(proteins) * 2, 20) // Add up to 20 points based on proteins
+            score += min(Int(proteins) * 2, 20) 
         }
 
         return max(1, min(score, 100))
@@ -57,7 +54,7 @@ extension Product {
 }
 
 
-// MARK: - Fetch Data
+
 
 
 class FoodDataFetcher: ObservableObject {
